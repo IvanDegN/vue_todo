@@ -1,12 +1,35 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <h1>Todo application</h1>
+    <hr>
+    <TodoList v-bind:todos="todos"
+    @remove-todo="removeTodo"/>
   </div>
 </template>
+
+<script>
+import TodoList from "@/components/TodoList";
+export default {
+  components: {TodoList},
+  data()
+  {
+    return {
+      todos: [
+        {id: 1, title: 'Купить молоко', completed: true},
+        {id: 2, title: 'Купить мясо', completed: false},
+        {id: 3, title: 'Купить сыр', completed: false},
+      ]
+    }
+  },
+  methods:{
+    removeTodo(id)
+    {
+      this.todos = this.todos.filter(t => t.id !== id)
+    }
+  }
+}
+
+</script>
 
 <style lang="scss">
 #app {
