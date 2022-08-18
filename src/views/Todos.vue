@@ -1,15 +1,24 @@
 <template>
-  <div id="app">
-    <h1>Todo application</h1>
+  <div>
+    <h2>Todo application</h2>
+    <router-link to="/">Home page</router-link>
     <hr>
-    <router-view/>
+    <AddTodo @add-todo="addTodo"/>
+    <hr>
+    <TodoList
+        v-if="todos.length"
+        v-bind:todos="todos"
+              @remove-todo="removeTodo"/>
+    <p v-else>No todos!</p>
   </div>
 </template>
+
 
 <script>
 import TodoList from "@/components/TodoList";
 import AddTodo from "@/components/AddTodo";
 export default {
+  name: "Todos",
   components: {TodoList, AddTodo},
   data()
   {
@@ -37,25 +46,7 @@ export default {
 
 </script>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
 
-nav {
-  padding: 30px;
+<style scoped>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>
